@@ -1,2 +1,4 @@
-const bjr = 'Hello World';
-alert(bjr);
+let direBonjour = (bjr)=>{
+    alert('bjr');
+}
+direBonjour('Hola!');
