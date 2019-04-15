@@ -1,2 +1,2 @@
 # gitDemo
-resository démo pour tester git/github
+repository demo pour tester git/github
