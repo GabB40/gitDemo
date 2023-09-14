@@ -1,1 +1,3 @@
 MAJ de ce vieux repo pour appréhender les git hooks
+
+1- prepare commit message
