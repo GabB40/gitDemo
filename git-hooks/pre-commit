@@ -6,10 +6,12 @@
 # it wants to stop the commit.
 #
 # To enable this hook, rename this file to "pre-commit".
-
+MSG_FILE=$1
+FILE_CONTENT="(cat $MSG_GILE)"
+echo "plop"
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
-echo "pre-commit : nouveau commit en création"
+  echo "pre-commit : nouveau commit en création"
 	against=HEAD
 else
 	# Initial commit: diff against an empty tree object
@@ -17,6 +19,15 @@ else
 	against=$(git hash-object -t tree /dev/null)
 fi
 
+
+if ! git diff-index --check --cached $against
+then
+    echo "pre-commit: Aborting commit due to whitespace errors"
+    exit 1
+else
+    echo "pre-commit: No whitespace errors :)"
+    exit 0
+fi
 # If you want to allow non-ASCII filenames set this variable to true.
 allownonascii=$(git config --type=bool hooks.allownonascii)
 
