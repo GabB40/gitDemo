@@ -1,3 +1,1 @@
-bla bla bla
-
-bli blou blo
+MAJ de ce vieux repo pour appréhender les git hooks
