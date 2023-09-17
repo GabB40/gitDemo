@@ -1,0 +1,20 @@
+#!/bin/bash
+
+MESSAGE=$(cat $1)
+REGEX="[A-Z]{3,} \[[0-9]+\-[1-5]\] #(S|R|F)\-[0-9]{6} \- .{3,}"
+
+# CHECK IF 'TEAM' HAS BEEN REPLACED
+if [[ "$MESSAGE" =~ ^"TEAM" ]]; then
+    echo "INVALID COMMIT MESSAGE: REPLACE 'TEAM' BY YOUR TEAM NAME"
+    exit 1
+fi
+
+# VERIFY REGEX
+if ! [[ "$MESSAGE" =~ $REGEX ]]; then
+    echo "INVALID COMMIT MESSAGE!"
+    echo ""
+    echo "Your commit message does not respect the defined pattern. Example of a valid commit message:"
+    echo ""
+    echo "OLDELPASO [31-4] #S-878037 - [Expose Cinvalidities] Get all Cinvalidities for a simulation"
+    exit 1
+fi

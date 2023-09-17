@@ -1,0 +1,3 @@
+# Lancer `$git config commit.template <chemin du fichier>` pour lier ce fichier aux commits
+# ce fichier peut-être 'gité' ou alors le placer dans le dossier .git
+TEAM [32-1] #S-000000 - [Feature] Descr
