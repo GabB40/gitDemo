@@ -1,3 +1,16 @@
-# Lancer `$git config commit.template <chemin du fichier>` pour lier ce fichier aux commits
-# ce fichier peut-être 'gité' ou alors le placer dans le dossier .git
-TEAM [32-1] #S-000000 - [Feature] Descr
+### Lancer `$git config commit.template <chemin du fichier>` pour lier ce fichier aux commits
+### ce fichier peut-être 'gité' ou alors le placer dans le dossier .git
+
+# The commit message must follow this pattern: 
+#  1. Begin with the team name in uppercase followed by a space
+#  2. Preceded by a space and enclosed in square brackets, the PI number and the IT number linked by a hyphen
+#  3. Preceded by a space and a '#', an uppercase letter identifying the type of commit: 
+#    - S for a Story
+#    - R for a Refacto
+#    - F for a Fix
+#  4. Preceded by a dash, the identifier of the associated V1 card (000000 if no associated card)
+#  5. Preceded by a space and enclosed in square brackets, the name of the associated feature, if any
+#  6. Preceded by a space, the commit description (story title if applicable)
+
+OLDELPASO [32-1] #S-000000 - [Feature] Descr
+#PEANUTS [32-1] #S-000000 - [Feature] Descr
