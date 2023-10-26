@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while read OLDREV NEWREV REFNAME ; do
+  for COMMIT in `git rev-list $OLDREV..$NEWREV`;
+  do
+    echo "refus via pre-receive hook"
+    exit 1
+  done
+done
+exit 0
