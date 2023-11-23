@@ -10,3 +10,5 @@ OLDELPASO [31-4] #S-878037 - [Expose Cinvalidities] Get all Cinvalidities for a 
 
 PR name example : 
 feat: PI31-IT3_OLDELPASO_S-771027_Create_AAT_Simulation
+
+^\d+\.\d+\.(\d+)$
