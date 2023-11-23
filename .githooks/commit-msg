@@ -10,12 +10,13 @@ COMMIT_MESSAGE=$(cat $1)
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
 # REGEX
-BRANCH_REGEX="(feature|bugfix|hotfix|test|wip)/[0-9]+\-0[1-5]_[A-Z]{3,}_(s|r|f)\-[0-9]{6,}_.{3,}"
-COMMIT_REGEX="[A-Z]{3,} \[[0-9]+\-0[1-5]\] #(S|R|F)\-[0-9]{6,} \- (feat|fix|refactor|perf|style|test|docs|build|ops|chore)(\((.{3,})\))?: .{3,}" # (\((.{3,})\))?: = groupe optionnel qui match tout charactère au nombre mini de 3 dans des parenthèses
+# TODO : voir si on autorise tous les caractères dans la description de la branche (cf: .{3,})
+BRANCH_REGEX="^(feature|bugfix|hotfix|test|wip)\/[0-9]+\-0[1-5]_[A-Z]{3,}_(s|r|d)\-[0-9]{6,}_.{3,}$"
+COMMIT_REGEX="^[A-Z]{3,} \[[0-9]+\-0[1-5]\] #(S|R|D)\-[0-9]{6,} \- (feat|fix|refactor|perf|style|test|docs|build|ops|chore)(\(.{3,}\))?: .{3,}$" # (\((.{3,})\))?: = groupe optionnel qui match tout charactère au nombre mini de 3 dans des parenthèses
 
 # VALID EXAMPLE
-VALID_BRANCH_NAME_1="feature/PI33-IT1_TEAM_S-123456_[Feature_Name]_Story_description"
-VALID_BRANCH_NAME_2="bugfix/PI33-IT1_TEAM_S-123456_[Feature_Name]_Story_description"
+VALID_BRANCH_NAME_1="feature/33-01_TEAM_s-123456_[Feature_Name]_Story_description"
+VALID_BRANCH_NAME_2="bugfix/33-01_TEAM_s-123456_[Feature_Name]_Story_description"
 VALID_COMMIT_MESSAGE_1="TEAM [33-01] #S-123456 - feat: Story description"
 VALID_COMMIT_MESSAGE_2="TEAM [33-01] #S-123456 - fix(scope): Story description"
 
@@ -36,9 +37,7 @@ error_message () {
 }
 
 ### CHECK BRANCH NAME
-# TODO : ENLEVER CONDITION SUR "master" après tests
-# if ! [[ "$BRANCH_NAME" =~ $BRANCH_REGEX ]]; then
-if [[ $BRANCH_NAME != "master" ]] && ! [[ "$BRANCH_NAME" =~ $BRANCH_REGEX ]]; then
+if ! [[ "$BRANCH_NAME" =~ $BRANCH_REGEX ]]; then
   error_message "branch name" "$BRANCH_NAME" "$BRANCH_REGEX" "$VALID_BRANCH_NAME_1" "$VALID_BRANCH_NAME_2"
 fi
 

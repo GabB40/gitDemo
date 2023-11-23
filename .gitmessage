@@ -12,5 +12,5 @@
 #  5. Preceded by a space and enclosed in square brackets, the name of the associated feature, if any
 #  6. Preceded by a space, the commit description (story title if applicable)
 
-OLDELPASO [32-1] #S-000000 - [Feature] Descr
+OLDELPASO [33-01] #S-123456 - feat(scope): Story description
 #PEANUTS [32-1] #S-000000 - [Feature] Descr
