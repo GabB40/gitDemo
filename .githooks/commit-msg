@@ -1,20 +1,48 @@
 #!/bin/bash
+# COLORS
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NO_COLOR='\033[0m'
 
-MESSAGE=$(cat $1)
-REGEX="[A-Z]{3,} \[[0-9]+\-[1-5]\] #(S|R|F)\-[0-9]{6} \- .{3,}"
+# PARAMETERS
+COMMIT_MESSAGE=$(cat $1)
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
-# CHECK IF 'TEAM' HAS BEEN REPLACED
-if [[ "$MESSAGE" =~ ^"TEAM" ]]; then
-    echo "INVALID COMMIT MESSAGE: REPLACE 'TEAM' BY YOUR TEAM NAME"
-    exit 1
+# REGEX
+BRANCH_REGEX="(feature|bugfix|hotfix|test|wip)/[0-9]+\-0[1-5]_[A-Z]{3,}_(s|r|f)\-[0-9]{6,}_.{3,}"
+COMMIT_REGEX="[A-Z]{3,} \[[0-9]+\-0[1-5]\] #(S|R|F)\-[0-9]{6,} \- (feat|fix|refactor|perf|style|test|docs|build|ops|chore)(\((.{3,})\))?: .{3,}" # (\((.{3,})\))?: = groupe optionnel qui match tout charactère au nombre mini de 3 dans des parenthèses
+
+# VALID EXAMPLE
+VALID_BRANCH_NAME_1="feature/PI33-IT1_TEAM_S-123456_[Feature_Name]_Story_description"
+VALID_BRANCH_NAME_2="bugfix/PI33-IT1_TEAM_S-123456_[Feature_Name]_Story_description"
+VALID_COMMIT_MESSAGE_1="TEAM [33-01] #S-123456 - feat: Story description"
+VALID_COMMIT_MESSAGE_2="TEAM [33-01] #S-123456 - fix(scope): Story description"
+
+# ERROR MESSAGE
+# quote parameters passed to function to avoid splits on spaces
+error_message () { 
+  echo ""
+  echo "ERROR: INVALID ${1^^} ! (click 'Show Command Output' for more details)"
+  echo "'$2'"
+  echo ""
+  echo "==> The $1 does not respect the defined pattern:"
+  echo "'$3'"
+  echo ""
+  echo "==> Example of valid $1s:"
+  echo "'$4'"
+  echo "'$5'"
+  exit 1
+}
+
+### CHECK BRANCH NAME
+# TODO : ENLEVER CONDITION SUR "master" après tests
+# if ! [[ "$BRANCH_NAME" =~ $BRANCH_REGEX ]]; then
+if [[ $BRANCH_NAME != "master" ]] && ! [[ "$BRANCH_NAME" =~ $BRANCH_REGEX ]]; then
+  error_message "branch name" "$BRANCH_NAME" "$BRANCH_REGEX" "$VALID_BRANCH_NAME_1" "$VALID_BRANCH_NAME_2"
 fi
 
-# VERIFY REGEX
-if ! [[ "$MESSAGE" =~ $REGEX ]]; then
-    echo "INVALID COMMIT MESSAGE!"
-    echo ""
-    echo "Your commit message does not respect the defined pattern. Example of a valid commit message:"
-    echo ""
-    echo "OLDELPASO [31-4] #S-878037 - [Expose Cinvalidities] Get all Cinvalidities for a simulation"
-    exit 1
+### CHECK COMMIT MESSAGE
+if ! [[ "$COMMIT_MESSAGE" =~ $COMMIT_REGEX ]]; then
+  error_message "commit message" "$COMMIT_MESSAGE" "$COMMIT_REGEX" "$VALID_COMMIT_MESSAGE_1" "$VALID_COMMIT_MESSAGE_2"
 fi
