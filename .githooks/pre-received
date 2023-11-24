@@ -1,23 +1,24 @@
 #!/bin/bash
+echo "BLOCAGE DE PUSH"
+exit 1
+# COMMIT_REGEX="[A-Z]{3,} \[[0-9]+\-0[1-5]\] #(S|R|F)\-[0-9]{6,} \- (feat|fix|refactor|perf|style|test|docs|build|ops|chore): .{3,}"
+# BRANCH_REGEX="(feature|bugfix|hotfix|test|wip)/[0-9]+\-0[1-5]_[A-Z]{3,}_(s|r|f)\-[0-9]{6,}_.{3,}"
+# COMMIT_ERROR_MSG="Incorrect commit name: please refer to the documentation (REGEX = $COMMIT_REGEX)"
+# BRANCH_ERROR_MSG="Incorrect branch name : please refer to the documentation (REGEX = $BRANCH_REGEX)"
 
-COMMIT_REGEX="[A-Z]{3,} \[[0-9]+\-0[1-5]\] #(S|R|F)\-[0-9]{6,} \- (feat|fix|refactor|perf|style|test|docs|build|ops|chore): .{3,}"
-BRANCH_REGEX="(feature|bugfix|hotfix|test|wip)/[0-9]+\-0[1-5]_[A-Z]{3,}_(s|r|f)\-[0-9]{6,}_.{3,}"
-COMMIT_ERROR_MSG="Incorrect commit name: please refer to the documentation (REGEX = $COMMIT_REGEX)"
-BRANCH_ERROR_MSG="Incorrect branch name : please refer to the documentation (REGEX = $BRANCH_REGEX)"
+# while read OLDREV NEWREV REFNAME ; do
+#   for COMMIT in `git rev-list $OLDREV..$NEWREV`;
+#   do
+#     MESSAGE=`git cat-file commit $COMMIT | sed '1,/^$/d'`
+#     if ! echo $MESSAGE | grep -iqE "$COMMIT_REGEX"; then
+#       echo "$COMMIT_ERROR_MSG: $MESSAGE" >&2
+#       exit 1
+#     fi
+#   done
 
-while read OLDREV NEWREV REFNAME ; do
-  for COMMIT in `git rev-list $OLDREV..$NEWREV`;
-  do
-    MESSAGE=`git cat-file commit $COMMIT | sed '1,/^$/d'`
-    if ! echo $MESSAGE | grep -iqE "$COMMIT_REGEX"; then
-      echo "$COMMIT_ERROR_MSG: $MESSAGE" >&2
-      exit 1
-    fi
-  done
-
-  if ! echo $REFNAME | grep -iqE "$BRANCH_REGEX"; then
-    echo "$BRANCH_ERROR_MSG: $MESSAGE" >&2
-    exit 1
-  fi
-done
-exit 0
+#   if ! echo $REFNAME | grep -iqE "$BRANCH_REGEX"; then
+#     echo "$BRANCH_ERROR_MSG: $MESSAGE" >&2
+#     exit 1
+#   fi
+# done
+# exit 0
