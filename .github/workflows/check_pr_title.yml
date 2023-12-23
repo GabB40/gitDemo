@@ -1,0 +1,12 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [pull_request]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Check PR naming on PR  '${{ github.event.pull_request.title }}'"
+      - uses: Slashgear/action-check-pr-title@v4.3.0
+        with:
+          regexp: "(feat|fix|docs): .++" # Regex the title should match.
+          helpMessage: "Example: 'feat: example of title'"
