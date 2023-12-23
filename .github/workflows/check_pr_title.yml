@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Check PR naming on PR  '${{ github.event.pull_request.title }}'"
-      - name: check PR Title
       - uses: Slashgear/action-check-pr-title@v4.3.0
         with:
           regexp: "^(feat|fix|refactor|perf|style|test|docs|build|ops|chore): PI[0-9]+-IT[1-5]_[A-Z]{3,}_(S|R|D)-[0-9]{6,}_.{3,}$" # Regex the title should match.
