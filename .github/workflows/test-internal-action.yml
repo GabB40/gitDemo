@@ -5,6 +5,6 @@ jobs:
   Test-Internal-Action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/test-action
+      - uses: actions/test-action@latest
         with:
           tolog: "My first log"
