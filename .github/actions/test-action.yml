@@ -1,4 +1,4 @@
-name: 'Test-Action'
+name: 'test-action'
 description: 'first test on creating an internal github action'
 author: '@GabB40'
 
