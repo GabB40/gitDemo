@@ -1,5 +1,5 @@
 name: Check PR Title
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} ask for PR '${{ github.event.pull_request.title }}'
 on: [pull_request]
 jobs:
   Check-PR-Title:
