@@ -1,0 +1,19 @@
+name: "Auto validate/update PR Title"
+description: "Check if PR title match a specific regex or, if not, update PR title from branch name"
+author: "GabB40"
+
+inputs:
+  gh-token: 
+    description: "Github Access Token To the repo"
+    required: true
+  base-branches:
+    description: "Basic branches on which to perform the action"
+    required: false
+    
+runs:
+  using: "node20"
+  main: "dist/index.js"
+
+branding:
+  icon: 'trending-up'
+  color: 'purple'
