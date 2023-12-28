@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run Auto PR Title
-        uses: ./
+        uses: ./.github/actions/auto-pr-title
         with: 
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           base-branches: |
