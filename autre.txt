@@ -3,13 +3,13 @@ MAJ de ce vieux repo pour appréhender les git hooks
 1- prepare-commit-msg
 
 branche name example :
-feature/PI31-IT4_OLDELPASO_S-878037_[Expose_Cinvalidities]_Get_all_Cinvalidities_for_a_simulation
+feature/33-02_OLDELPASO_s-000006_GithubActions-Test-check-PR-Title
 
 commit message example :
 OLDELPASO [31-4] #S-878037 - [Expose Cinvalidities] Get all Cinvalidities for a simulation
 
 PR name example : 
-feat: PI31-IT3_OLDELPASO_S-771027_Create-AAT-Simulation
+feat: PI33-IT2_OLDELPASO_S-000006_GithubActions-Test-check-PR-Title
 regex : ^(feat|fix|refactor|perf|style|test|docs|build|ops|chore): PI[0-9]+-IT[1-5]_[A-Z]{3,}_(S|R|D)\-[0-9]{6,}_.{3,}$
 
 regex pattern for version control : ^\d+\.\d+\.(\d+)$
